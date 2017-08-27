@@ -1,9 +1,143 @@
 <html>
     <head>
-        <title>Gooday</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Gooday Diary</title>
+
+        <link rel="stylesheet" href="./lib/bootstrap-grid.css">
+        <style>
+            @font-face {
+                font-family: Oswald;
+                src: local('Oswald'), url('./font/Oswald-Light.ttf');
+                font-weight: normal;
+            }
+            @font-face {
+                font-family: Oswald;
+                src: local('Oswald'), url('./font/Oswald-Bold.ttf');
+                font-weight: bold;
+            }
+
+            body {
+                margin: 0;
+                overflow-x: hidden;
+                font-family: 'Oswald';
+            }
+
+            #page {
+                position: relative;
+            }
+
+            #page:after {
+                display: block;
+                content: '';
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: inherit;
+                min-height: 110%;
+                z-index: -10;
+
+                background: url('./img/bg.png');
+                background-repeat: repeat;
+                background-size: 288px;
+            }
+
+            .title {
+                text-align: center;
+            }
+
+            h1 {
+                margin: 0;
+                padding-top: 2rem;
+                font-size: 2.7rem;
+                color: #444;
+            }
+
+            #subtitle {
+                font-weight: normal;
+                font-size: 1.5rem;
+                color: #999;
+            }
+
+            img {
+                max-width: 100%;
+            }
+
+            .screen {
+                max-width: 600px;
+                margin: 40px auto;
+            }
+
+            .screen img {
+                border: 1px solid #DDD;
+            }
+
+            .info {
+                color: #999;
+                text-align: center;
+            }
+        </style>
     </head>
 
     <body>
+        <div class="bg"></div>
+        <div id="page">
+            <div class="container">
+                <div class="title">
+                    <h1 id="title">Gooday Diary</h1>
+                    <div id="subtitle">A Diary for Your Daily Mood</div>
+                </div>
+                <div class="screen row">
+                    <div class="col-sm-6">
+                        <img src="./img/home.png" alt="Home Page">
+                    </div>
+                    <div class="col-sm-6">
+                        <img src="./img/stat.png" alt="Statistic Page">
+                    </div>
+                </div>
 
+                <p class="info">The app is now under reviewing on iOS platform.</p>
+            </div>
+        </div>
+
+        <script>
+            if (window.location.search) {
+                var param = window.location.search.substr(1);
+                if (param.indexOf('lang=') >= 0) {
+                    var title = null;
+                    var subtitle = null;
+
+                    var lang = param.substr('lang='.length);
+                    switch (lang) {
+                        case 'cn':
+                            title = '牙哈哈心情日记';
+                            subtitle = '超可爱的心情记录软件';
+                            break;
+
+                        case 'jp':
+                            title = '思い出メモ';
+                            subtitle = '今日の気持ちわ明日の思い出になる';
+                            break;
+
+                        case 'fr':
+                            title = 'Journal Gooday';
+                            subtitle = 'De votre humeur quotidienne';
+                            break;
+                    }
+
+                    if (title) {
+                        document.getElementById('title').innerHTML = title;
+                        document.getElementById('subtitle').innerHTML = subtitle;
+                        var titleTags = document.getElementsByTagName('title');
+                        if (titleTags && titleTags.length > 0) {
+                            titleTags[0].innerHTML = title;
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>
